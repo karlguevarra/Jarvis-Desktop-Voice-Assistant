@@ -21,14 +21,14 @@ def time():
     print("The current time is ", Time)
 
 def date():
-    day = int(datetime.datetime.now().day)
-    month = int(datetime.datetime.now().month)
-    year = int(datetime.datetime.now().year)
+    day = datetime.datetime.now().day
+    month = datetime.datetime.now().month
+    year = datetime.datetime.now().year
     speak("the current date is")
     speak(day)
     speak(month)
     speak(year)
-    print("The current date is " + str(day) + "/" + str(month) + "/" + str(year))
+    print(f"The current date is {day}/{month}/{year}")
 
 def wishme():
     print("Welcome back sir!!")
@@ -109,13 +109,13 @@ if __name__ == "__main__":
                 speak(result)
             except:
                 speak("Can't find this page sir, please ask something else")
-        
+
         elif "open youtube" in query:
             wb.open("youtube.com") 
 
         elif "open google" in query:
             wb.open("google.com") 
-   
+
         elif "open stack overflow" in query:
             wb.open("stackoverflow.com")
 
@@ -143,21 +143,19 @@ if __name__ == "__main__":
             except Exception as e:
                 speak("Can't open now, please try again later.")
                 print("Can't open now, please try again later.")
-            
-        
+
+
         elif "remember that" in query:
             speak("What should I remember")
             data = takecommand()
-            speak("You said me to remember that" + data)
-            print("You said me to remember that " + str(data))
-            remember = open("data.txt", "w")
-            remember.write(data)
-            remember.close()
-
+            speak(f"You said me to remember that{data}")
+            print(f"You said me to remember that {str(data)}")
+            with open("data.txt", "w") as remember:
+                remember.write(data)
         elif "do you remember anything" in query:
             remember = open("data.txt", "r")
-            speak("You told me to remember that" + remember.read())
-            print("You told me to remember that " + str(remember))
+            speak(f"You told me to remember that{remember.read()}")
+            print(f"You told me to remember that {str(remember)}")
 
         elif "screenshot" in query:
             screenshot()
